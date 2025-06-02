@@ -8,10 +8,12 @@ export default function Navbar() {
     <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          <a href="#" className="block">
           <div className="flex items-center">
             <Car className="h-8 w-8 text-emerald-600" />
             <span className="ml-2 text-xl font-bold text-gray-900">Electrysure</span>
           </div>
+          </a>
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">

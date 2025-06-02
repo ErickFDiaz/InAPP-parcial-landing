@@ -83,7 +83,7 @@ export default function VehicleDetails() {
                   value={vehicleData.year}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 px-1 py-1"
                 >
                   <option value="">Seleccionar año</option>
                   {VEHICLE_DATA.years.map(year => (
@@ -102,7 +102,7 @@ export default function VehicleDetails() {
                   value={vehicleData.brand}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 px-1 py-1"
                 >
                   <option value="">Seleccionar marca</option>
                   {VEHICLE_DATA.brands.map(brand => (
@@ -122,7 +122,7 @@ export default function VehicleDetails() {
                   onChange={handleChange}
                   required
                   disabled={!vehicleData.brand}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 px-1 py-1"
                 >
                   <option value="">Seleccionar modelo</option>
                   {selectedBrand?.models.map(model => (

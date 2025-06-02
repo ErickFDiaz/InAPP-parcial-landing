@@ -11,8 +11,33 @@ export default function QuoteForm() {
     acceptedPolicy: false
   });
 
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
+
+    const numericFields: { [key: string]: number } = {
+      phone: 9,
+      document: 8,
+    };
+
+    if (name in numericFields) {
+      const maxLength = numericFields[name];
+  
+      if (value && !/^\d*$/.test(value)) {
+        setErrors(prev => ({ ...prev, [name]: 'Solo se permiten números' }));
+        return;
+      }
+  
+      if (value.length > maxLength) {
+        setErrors(prev => ({ ...prev, [name]: `Máximo ${maxLength} dígitos` }));
+        return;
+      }
+  
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  
+
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
@@ -71,7 +96,7 @@ export default function QuoteForm() {
               name="plate"
               value={formData.plate}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 px-3 py-2"
               placeholder="ABC-123"
               maxLength={7}
             />
@@ -88,26 +113,34 @@ export default function QuoteForm() {
             name="document"
             value={formData.document}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3
+                      ${errors.document ? 'border-red-500' : 'border-gray-300'}"
             placeholder="Ingresa tu número de documento"
             required
           />
+          {errors.document && (
+  <p className="text-red-500 text-sm mt-1">{errors.document}</p>
+)}
         </div>
 
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
             Número de celular
           </label>
-          <input
+          <input 
             type="tel"
             id="phone"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3
+                        ${errors.phone ? 'border-red-500' : 'border-gray-300'}"
             placeholder="Ingresa tu número de celular"
             required
           />
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+            )}
         </div>
 
         <div className="flex items-center">
