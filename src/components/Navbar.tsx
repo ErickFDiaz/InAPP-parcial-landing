@@ -1,5 +1,6 @@
 import { Car, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,25 +9,31 @@ export default function Navbar() {
     <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="block">
+          <Link to="/" className="block">
           <div className="flex items-center">
             <Car className="h-8 w-8 text-emerald-600" />
             <span className="ml-2 text-xl font-bold text-gray-900">Electrysure</span>
           </div>
-          </a>
+          </Link>
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
-              <a href="#features" className="text-gray-700 hover:text-emerald-600 px-3 py-2">
+              <Link to="/#aboutUs" className="text-gray-700 hover:text-emerald-600 px-3 py-2">
+                Sobre Nosotros
+              </Link>
+              <Link to="/#features" className="text-gray-700 hover:text-emerald-600 px-3 py-2">
                 Características
-              </a>
-              <a href="#benefits" className="text-gray-700 hover:text-emerald-600 px-3 py-2">
-                Beneficios
-              </a>
-              <a href="#testimonials" className="text-gray-700 hover:text-emerald-600 px-3 py-2">
+              </Link>
+              <Link to="/#testimonials" className="text-gray-700 hover:text-emerald-600 px-3 py-2">
                 Testimonios
-              </a>
-              <button className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
+              </Link>
+              <button onClick={() => {
+                  const element = document.querySelector('#quote');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }} 
+                className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
                 Cotizar Ahora
               </button>
             </div>
@@ -43,16 +50,22 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
-            <a href="#features" className="block text-gray-700 hover:text-emerald-600 px-3 py-2">
+            <Link to="#aboutUs" className="block text-gray-700 hover:text-emerald-600 px-3 py-2">
+              Sobre Nosotros
+            </Link>
+            <Link to="#features" className="block text-gray-700 hover:text-emerald-600 px-3 py-2">
               Características
-            </a>
-            <a href="#benefits" className="block text-gray-700 hover:text-emerald-600 px-3 py-2">
-              Beneficios
-            </a>
-            <a href="#testimonials" className="block text-gray-700 hover:text-emerald-600 px-3 py-2">
+            </Link>
+            <Link to="#testimonials" className="block text-gray-700 hover:text-emerald-600 px-3 py-2">
               Testimonios
-            </a>
-            <button className="w-full text-center bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
+            </Link>
+            <button onClick={() => {
+                const element = document.querySelector('#quote');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}  
+            className="w-full text-center bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
               Cotizar Ahora
             </button>
           </div>

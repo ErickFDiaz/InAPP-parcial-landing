@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from './Modal';
 
 export default function QuoteForm() {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ export default function QuoteForm() {
     phone: '',
     acceptedPolicy: false
   });
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -154,10 +157,16 @@ export default function QuoteForm() {
             required
           />
           <label htmlFor="acceptedPolicy" className="ml-2 block text-sm text-gray-700">
-            Acepto la{' '}
-            <a href="#" className="text-emerald-600 hover:text-emerald-500">
-              política de privacidad
-            </a>
+            He leído y acepto los{' '}
+            <a
+            onClick={(e) => {
+              e.preventDefault();
+              setModalOpen(true);
+            }}
+            className="text-emerald-600 hover:text-emerald-500">términos y condiciones</a>
+
+            <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+
           </label>
         </div>
 
