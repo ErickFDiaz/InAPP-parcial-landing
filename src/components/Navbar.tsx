@@ -12,7 +12,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="block">
           <div className="flex items-center">
-            <Car className="h-8 w-8 text-emerald-600" />
+            <img src="/vite.png" className="h-8 w-8 text-emerald-600"/>
             <span className="ml-2 text-xl font-bold text-gray-900">Electrysure</span>
           </div>
           </Link>
