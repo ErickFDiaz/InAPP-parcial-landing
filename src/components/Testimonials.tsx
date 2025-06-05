@@ -1,3 +1,5 @@
+import { motion, useAnimation } from "framer-motion";
+import { useEffect } from "react";
 import { Star } from 'lucide-react';
 
 const testimonials = [
@@ -21,27 +23,72 @@ const testimonials = [
     image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80',
     quote: 'Excelente cobertura y atención personalizada. Recomiendo totalmente el servicio.',
     rating: 5
-  }
+  },
+  {
+    name: "Luis Garcia",
+    role: "Conductor de Volvo C40",
+    image: "https://randomuser.me/api/portraits/men/40.jpg",
+    rating: 5,
+    quote: "Muy buena atención al cliente y resultados rápidos. Un servicio 10/10",
+  },
+  {
+    name: "Pamela Villegas",
+    role: "Conductora de Maxus EV30",
+    image: "https://randomuser.me/api/portraits/women/29.jpg",
+    rating: 5,
+    quote: "Cuando tuve problemas, fueron de inmediato en mi ayuda. Servicio muy confiable",
+  },
+  {
+    name: "Martin Cardenas",
+    role: "Conductor de Audi e-Tron",
+    image: "https://randomuser.me/api/portraits/men/20.jpg",
+    rating: 5,
+    quote: "Un servicio recomendado, la atencion es rapida y cuenta con muchos beneficios.",
+  },
 ];
 
 export default function Testimonials() {
-  return (
-    <section id="testimonials" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">
-            Lo que dicen nuestros clientes
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-            Experiencias reales de propietarios de vehículos eléctricos
-          </p>
-        </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
+  const controls = useAnimation();
+  useEffect(() => {
+    const animate = async () => {
+      while (true) {
+        await controls.start({
+          x: "-50%",
+          transition: {
+            duration: 30,
+            ease: "linear",
+          },
+        });
+        controls.set({ x: "0%" });
+      }
+    };
+    animate();
+  }, [controls]);
+
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
+
+  return (
+    <section id="testimonials" className="py-20 bg-gray-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-3xl font-bold text-gray-900">
+          Lo que dicen nuestros clientes
+        </h2>
+        <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+          Experiencias reales de propietarios de vehículos eléctricos
+        </p>
+      </div>
+
+      <div className="mt-16 relative overflow-hidden p-3">
+        <motion.div
+          className="flex gap-8 w-max"
+          animate={controls}
+          style={{ x: "0%" }}
+        >
+          {duplicatedTestimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md overflow-hidden p-6"
+              className="min-w-[350px] max-w-xs bg-white rounded-xl shadow-md overflow-hidden p-6"
             >
               <div className="flex items-center">
                 <img
@@ -49,7 +96,7 @@ export default function Testimonials() {
                   src={testimonial.image}
                   alt={testimonial.name}
                 />
-                <div className="ml-4">
+                <div className="ml-4 text-left">
                   <h3 className="text-lg font-medium text-gray-900">
                     {testimonial.name}
                   </h3>
@@ -69,7 +116,7 @@ export default function Testimonials() {
               </blockquote>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Car, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const VEHICLE_DATA = {
   brands: [
@@ -164,7 +165,7 @@ export default function VehicleDetails() {
             </div>
           </div>
 
-          <div className="flex justify-center">
+          <motion.div className="flex justify-center" whileHover={{ scale: 1.08 }} whileTap={{ scale: 1 }}>
             <button
               type="submit"
               disabled={!vehicleData.year || !vehicleData.brand || !vehicleData.model || !vehicleData.usage}
@@ -172,7 +173,7 @@ export default function VehicleDetails() {
             >
               Continuar
             </button>
-          </div>
+          </motion.div>
         </form>
       </div>
     </div>

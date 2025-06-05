@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from './Modal';
+import { motion } from 'framer-motion';
 
 export default function QuoteForm() {
   const navigate = useNavigate();
@@ -169,17 +170,19 @@ export default function QuoteForm() {
 
           </label>
         </div>
-
-        <button
-          type="submit"
-          disabled={!formData.acceptedPolicy}
-          className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
-            ${formData.acceptedPolicy 
-              ? 'bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500' 
-              : 'bg-gray-400 cursor-not-allowed'}`}
-        >
-          Cotizar Ahora
-        </button>
+        
+        <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 1 }}>
+          <button
+            type="submit"
+            disabled={!formData.acceptedPolicy}
+            className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
+              ${formData.acceptedPolicy 
+                ? 'bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500' 
+                : 'bg-gray-400 cursor-not-allowed'}`}
+          >
+            Cotizar Ahora
+          </button>
+        </motion.div>
       </form>
     </div>
   );

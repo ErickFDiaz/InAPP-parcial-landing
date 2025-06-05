@@ -1,4 +1,4 @@
-
+import { motion } from "framer-motion"
 
 export default function AboutUs() {
     return(
@@ -12,13 +12,14 @@ export default function AboutUs() {
           el proceso de encontrar y comparar opciones que se adapten a tus necesidades, presupuesto y estilo de vida.</p>
         </div>
 
-        <div className="md:w-1/2 px-4">
-          <img
-            src="https://coldview.com/wp-content/uploads/2024/03/gestion-de-la-informacion-en-empresas-aseguradoras-scaled-e1711106580548.jpg"
-            className="w-full h-auto rounded-xl shadow-md"
-          />
+        <motion.div className="md:w-1/2 px-4"
+          whileHover={{ scale: 1.06 }}>
+            <img
+              src="https://coldview.com/wp-content/uploads/2024/03/gestion-de-la-informacion-en-empresas-aseguradoras-scaled-e1711106580548.jpg"
+              className="w-full h-auto rounded-xl shadow-md"
+            />
+        </motion.div>
         </div>
-      </div>
         </section>
     )
 }

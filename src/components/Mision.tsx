@@ -1,4 +1,4 @@
-
+import { motion } from "framer-motion";
 
 export default function Mision() {
     return(
@@ -14,13 +14,13 @@ export default function Mision() {
                     </p>
                 </div>
 
-                <div className="order-2 md:order-1 md:w-1/2 px-4">
+                <motion.div className="order-2 md:order-1 md:w-1/2 px-4"
+                whileHover={{ scale: 1.06 }}>
                     <img
                         src="https://static.mercadonegro.pe/wp-content/uploads/2019/11/22192339/images-9.jpg"
                         className="w-full h-auto rounded-xl shadow-md"
-                        alt="Nuestra misión"
                     />
-                </div>
+                </motion.div>
             </div>
         </section>
     )

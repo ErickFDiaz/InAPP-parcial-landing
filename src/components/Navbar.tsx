@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Car, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -27,6 +28,7 @@ export default function Navbar() {
               <Link to="/#testimonials" className="text-gray-700 hover:text-emerald-600 px-3 py-2">
                 Testimonios
               </Link>
+              <motion.div whileHover={{ scale: 1.09 }} whileTap={{ scale: 0.9 }}>
               <button onClick={() => {
                   const element = document.querySelector('#quote');
                   if (element) {
@@ -34,8 +36,10 @@ export default function Navbar() {
                   }
                 }} 
                 className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
+                
                 Cotizar Ahora
               </button>
+              </motion.div>
             </div>
           </div>
           
@@ -66,7 +70,7 @@ export default function Navbar() {
                 }
               }}  
             className="w-full text-center bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
-              Cotizar Ahora
+            Cotizar Ahora
             </button>
           </div>
         </div>
