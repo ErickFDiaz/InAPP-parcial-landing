@@ -25,21 +25,39 @@ export default function Hero() {
 
         <div className="mt-20">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="bg-white rounded-xl shadow-md p-6">
+            <motion.div
+              className="bg-white rounded-xl shadow-md p-6 border border-transparent"
+              whileHover={{
+                scale: 1.05,
+                borderColor: "#10B981",
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}>
               <Shield className="h-12 w-12 text-emerald-600 mb-4" />
               <h3 className="text-lg font-semibold">Cobertura Especializada</h3>
               <p className="mt-2 text-gray-600">Protección específica para componentes eléctricos y batería.</p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-6">
+            </motion.div>
+            <motion.div
+              className="bg-white rounded-xl shadow-md p-6 border border-transparent"
+              whileHover={{
+                scale: 1.05,
+                borderColor: "#10B981",
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}>
               <Zap className="h-12 w-12 text-emerald-600 mb-4" />
               <h3 className="text-lg font-semibold">Asistencia 24/7</h3>
               <p className="mt-2 text-gray-600">Servicio de recarga de emergencia y asistencia especializada.</p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-6">
+            </motion.div>
+            <motion.div
+              className="bg-white rounded-xl shadow-md p-6 border border-transparent"
+              whileHover={{
+                scale: 1.05,
+                borderColor: "#10B981",
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}>
               <Car className="h-12 w-12 text-emerald-600 mb-4" />
               <h3 className="text-lg font-semibold">Valor Preferencial</h3>
               <p className="mt-2 text-gray-600">Tarifas ajustadas al menor riesgo de los vehículos eléctricos.</p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -26,15 +26,9 @@ export default function QuoteForm() {
     };
 
     if (name in numericFields) {
-      const maxLength = numericFields[name];
   
       if (value && !/^\d*$/.test(value)) {
         setErrors(prev => ({ ...prev, [name]: 'Solo se permiten números' }));
-        return;
-      }
-  
-      if (value.length > maxLength) {
-        setErrors(prev => ({ ...prev, [name]: `Máximo ${maxLength} dígitos` }));
         return;
       }
   
@@ -52,8 +46,23 @@ export default function QuoteForm() {
     }
   };
 
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+    if (formData.document.length !== 8) {
+      newErrors.document = 'El documento debe tener 8 números';
+    }
+    if (formData.phone.length !== 9) {
+      newErrors.phone = 'El telefono debe tener 9 números';
+    }
+  
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return;
     try {
       // API call would go here
       // await fetch('api/quotes', {
@@ -69,7 +78,12 @@ export default function QuoteForm() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-auto">
+    <motion.div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-auto"
+      initial={{ y: 100, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.5 }}
+    >
       <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
         Cotiza tu seguro
       </h3>
@@ -120,11 +134,12 @@ export default function QuoteForm() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3
                       ${errors.document ? 'border-red-500' : 'border-gray-300'}"
             placeholder="Ingresa tu número de documento"
+            maxLength={8}
             required
           />
           {errors.document && (
-  <p className="text-red-500 text-sm mt-1">{errors.document}</p>
-)}
+            <p className="text-red-500 text-sm mt-1">{errors.document}</p>
+          )}
         </div>
 
         <div>
@@ -140,6 +155,7 @@ export default function QuoteForm() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3
                         ${errors.phone ? 'border-red-500' : 'border-gray-300'}"
             placeholder="Ingresa tu número de celular"
+            maxLength={9}
             required
           />
             {errors.phone && (
@@ -184,6 +200,6 @@ export default function QuoteForm() {
           </button>
         </motion.div>
       </form>
-    </div>
+    </motion.div>
   );
 }
