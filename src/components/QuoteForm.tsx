@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from './Modal';
 import { motion } from 'framer-motion';
+import { useQuote } from '../context/QuoteContext';
 
 export default function QuoteForm() {
   const navigate = useNavigate();
+  const { updateQuoteData } = useQuote();
+
   const [formData, setFormData] = useState({
     hasPlate: false,
     plate: '',
@@ -63,18 +66,13 @@ export default function QuoteForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
-    try {
-      // API call would go here
-      // await fetch('api/quotes', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
-      
-      navigate('/vehicle-details');
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+
+    // 3. Guarda los datos relevantes en el contexto
+    const { acceptedPolicy, ...quoteInfo } = formData; // Excluimos 'acceptedPolicy' si no es necesario en el API
+    updateQuoteData(quoteInfo);
+
+    // 4. Navega a la siguiente página
+    navigate('/vehicle-details');
   };
 
   return (

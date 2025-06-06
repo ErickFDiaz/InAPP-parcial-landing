@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Car, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useQuote } from '../context/QuoteContext';
 
 const VEHICLE_DATA = {
   brands: [
@@ -36,12 +37,20 @@ const VEHICLE_DATA = {
 
 export default function VehicleDetails() {
   const navigate = useNavigate();
+  const { quoteData, updateQuoteData } = useQuote();
+
   const [vehicleData, setVehicleData] = useState({
     year: '',
     brand: '',
     model: '',
     usage: ''
   });
+  useEffect(() => {
+    if (!quoteData.document) {
+      console.warn("No hay datos del formulario inicial, redirigiendo.");
+      navigate('/');
+    }
+  }, [quoteData, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -57,10 +66,48 @@ export default function VehicleDetails() {
     setVehicleData(prev => ({ ...prev, usage }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/quote-result');
+
+    // 4. Combinar los datos del contexto (QuoteForm) con los datos locales (VehicleDetails)
+    const fullQuotePayload = {
+      ...quoteData,
+      ...vehicleData,
+    };
+
+    // 5. Guardar los datos del vehículo en el contexto por si se necesitan después
+    updateQuoteData(vehicleData);
+
+    console.log('Enviando payload completo a la API:', fullQuotePayload);
+
+    try {
+      // AQUÍ ES DONDE EJECUTAS LA PETICIÓN A LA API
+      const response = await fetch('http://localhost:9999/api/1.0/quotes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fullQuotePayload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Error en la cotización');
+      }
+
+      console.log('Respuesta de la API:', result);
+
+      // navigate('/quote-result', { state: { result } }); // Pasando el resultado vía state
+      navigate('/quote-result');
+
+
+    } catch (error) {
+      console.error('Error al enviar la cotización:', error);
+      // Aquí podrías manejar el error, por ejemplo, mostrando un mensaje al usuario
+    }
   };
+
 
   const selectedBrand = VEHICLE_DATA.brands.find(b => b.name === vehicleData.brand);
 
@@ -141,9 +188,8 @@ export default function VehicleDetails() {
                 <button
                   type="button"
                   onClick={() => handleUsageSelect('particular')}
-                  className={`p-6 border rounded-lg text-center hover:border-emerald-500 transition-colors ${
-                    vehicleData.usage === 'particular' ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200'
-                  }`}
+                  className={`p-6 border rounded-lg text-center hover:border-emerald-500 transition-colors ${vehicleData.usage === 'particular' ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200'
+                    }`}
                 >
                   <Users className="h-8 w-8 mx-auto text-emerald-600 mb-3" />
                   <h3 className="font-semibold mb-2">Particular</h3>
@@ -153,9 +199,8 @@ export default function VehicleDetails() {
                 <button
                   type="button"
                   onClick={() => handleUsageSelect('otros')}
-                  className={`p-6 border rounded-lg text-center hover:border-emerald-500 transition-colors ${
-                    vehicleData.usage === 'otros' ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200'
-                  }`}
+                  className={`p-6 border rounded-lg text-center hover:border-emerald-500 transition-colors ${vehicleData.usage === 'otros' ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200'
+                    }`}
                 >
                   <Car className="h-8 w-8 mx-auto text-emerald-600 mb-3" />
                   <h3 className="font-semibold mb-2">Otros</h3>
