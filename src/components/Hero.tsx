@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Zap, Car } from 'lucide-react';
 
 export default function Hero() {
@@ -13,32 +14,50 @@ export default function Hero() {
             Protege tu inversión en movilidad sostenible con coberturas especializadas para vehículos eléctricos.
           </p>
           <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-            <div className="rounded-md shadow">
+            <motion.div className="rounded-md shadow"  whileHover={{ scale: 1.09 }}>
               <a href="#quote" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 md:py-4 md:text-lg md:px-10">
                 Cotizar Ahora
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         <div className="mt-20">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="bg-white rounded-xl shadow-md p-6">
+            <motion.div
+              className="bg-white rounded-xl shadow-md p-6 border border-transparent"
+              whileHover={{
+                scale: 1.05,
+                borderColor: "#10B981",
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}>
               <Shield className="h-12 w-12 text-emerald-600 mb-4" />
               <h3 className="text-lg font-semibold">Cobertura Especializada</h3>
               <p className="mt-2 text-gray-600">Protección específica para componentes eléctricos y batería.</p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-6">
+            </motion.div>
+            <motion.div
+              className="bg-white rounded-xl shadow-md p-6 border border-transparent"
+              whileHover={{
+                scale: 1.05,
+                borderColor: "#10B981",
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}>
               <Zap className="h-12 w-12 text-emerald-600 mb-4" />
               <h3 className="text-lg font-semibold">Asistencia 24/7</h3>
               <p className="mt-2 text-gray-600">Servicio de recarga de emergencia y asistencia especializada.</p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-6">
+            </motion.div>
+            <motion.div
+              className="bg-white rounded-xl shadow-md p-6 border border-transparent"
+              whileHover={{
+                scale: 1.05,
+                borderColor: "#10B981",
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}>
               <Car className="h-12 w-12 text-emerald-600 mb-4" />
               <h3 className="text-lg font-semibold">Valor Preferencial</h3>
               <p className="mt-2 text-gray-600">Tarifas ajustadas al menor riesgo de los vehículos eléctricos.</p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

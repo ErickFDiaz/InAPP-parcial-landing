@@ -1,4 +1,5 @@
 import { Shield, Zap, Clock, CreditCard, HeartHandshake, PhoneCall } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const features = [
   {
@@ -46,13 +47,15 @@ export default function Features() {
           </p>
         </div>
 
+        
         <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div
+              <motion.div 
                 key={index}
-                className="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-500 rounded-lg transition-all duration-300 hover:shadow-lg"
+                className="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-500 rounded-lg transition-all duration-300 hover:shadow-xl"
+                whileHover={{ scale: 1.09 }} whileTap={{ scale: 0.09 }}
               >
                 <div>
                   <span className="rounded-lg inline-flex p-3 bg-emerald-50 text-emerald-600 ring-4 ring-white">
@@ -68,7 +71,7 @@ export default function Features() {
                     {feature.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

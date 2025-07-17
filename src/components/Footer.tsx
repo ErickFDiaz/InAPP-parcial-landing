@@ -26,6 +26,10 @@ export default function Footer() {
                 <a href="#" className="text-base text-gray-300 hover:text-white">
                   Inicio
                 </a>
+              </li><li>
+                <a href="#aboutUs" className="text-base text-gray-300 hover:text-white">
+                  Sobre Nosotros
+                </a>
               </li>
               <li>
                 <a href="#features" className="text-base text-gray-300 hover:text-white">

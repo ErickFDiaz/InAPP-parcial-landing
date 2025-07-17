@@ -1,10 +1,26 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Hero from './Hero';
 import QuoteForm from './QuoteForm';
 import Features from './Features';
 import Testimonials from './Testimonials';
 import Footer from './Footer';
+import AboutUs from './AboutUs';
+import Mision from './Mision';
 
 export default function HomePage() {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   return (
     <>
       <Hero />
@@ -19,7 +35,8 @@ export default function HomePage() {
           <QuoteForm />
         </div>
       </section>
-      
+      <AboutUs />
+      <Mision />
       <Features />
       <Testimonials />
       <Footer />
